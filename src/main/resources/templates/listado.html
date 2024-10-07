@@ -1,0 +1,26 @@
+<form th:action="@{/encuestas/filtrar}" method="get">
+    <select name="motivo">
+        <option value="">Todos</option>
+        <option value="Trabajo">Trabajo</option>
+        <!-- Otros motivos -->
+    </select>
+    <button type="submit">Filtrar</button>
+</form>
+
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Fecha Estancia</th>
+        <th>Nivel Satisfacción</th>
+        <th>Acciones</th>
+    </tr>
+    <tr th:each="encuesta : ${encuestas}">
+        <td th:text="${encuesta.nombre}"></td>
+        <td th:text="${encuesta.fechaInicioEstancia}"></td>
+        <td th:text="${encuesta.nivelSatisfaccion}"></td>
+        <td>
+            <a th:href="@{/encuestas/ver/{id}(id=${encuesta.id})}">Ver</a>
+            <a th:href="@{/encuestas/eliminar/{id}(id=${encuesta.id})}">Eliminar</a>
+        </td>
+    </tr>
+</table>

@@ -22,7 +22,7 @@ public class Encuesta {
 
     @NotBlank(message = "Los apellidos son obligatorios.")
     @Size(min =2, message = "El nombre debe de tener al menos dos caracteres.")
-    private String apellido;
+    private String apellidos;
 
     @Email(message = "El formato es inválido.")
     @NotBlank(message = "El email es obligatorio.")
@@ -48,7 +48,7 @@ public class Encuesta {
     private String otrosComentarios;
 
     public Encuesta(String apellido, String nombre, Long id, String email, Integer edad, String telefono, LocalDate fechaInicioEstancia, String motivoVisita, List<String> serviciosUtilizados, String nivelSatisfaccion, String otrosComentarios) {
-        this.apellido = apellido;
+        this.apellidos = apellidos;
         this.nombre = nombre;
         this.id = id;
         this.email = email;
@@ -73,7 +73,7 @@ public class Encuesta {
         this.id = id;
     }
 
-    public String getOtrosComentarios() {
+    public String get0trosComentarios() {
         return otrosComentarios;
     }
 
@@ -97,12 +97,12 @@ public class Encuesta {
         this.edad = edad;
     }
 
-    public @NotBlank(message = "Los apellidos son obligatorios.") @Size(min = 2, message = "El nombre debe de tener al menos dos caracteres.") String getApellido() {
-        return apellido;
+    public @NotBlank(message = "Los apellidos son obligatorios.") @Size(min = 2, message = "El nombre debe de tener al menos dos caracteres.") String getApellidos() {
+        return apellidos;
     }
 
-    public void setApellido(@NotBlank(message = "Los apellidos son obligatorios.") @Size(min = 2, message = "El nombre debe de tener al menos dos caracteres.") String apellido) {
-        this.apellido = apellido;
+    public void setApellidos(@NotBlank(message = "Los apellidos son obligatorios.") @Size(min = 2, message = "El nombre debe de tener al menos dos caracteres.") String apellidos) {
+        this.apellidos = apellidos;
     }
 
     public @NotBlank(message = "El nombre es obligatorio.") @Size(min = 2, message = "El nombre debe de tener al menos dos caracteres.") String getNombre() {
@@ -153,12 +153,13 @@ public class Encuesta {
         this.serviciosUtilizados = serviciosUtilizados;
     }
 
+
     @Override
     public String toString() {
         return "Encuesta{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
+                ", apellidos='" + apellidos + '\'' +
                 ", email='" + email + '\'' +
                 ", edad=" + edad +
                 ", telefono='" + telefono + '\'' +

@@ -1,12 +1,21 @@
 package com.tarea1.tarea1.Controller;
+import org.springframework.ui.Model;
 
-import ch.qos.logback.core.model.Model;
 import com.tarea1.tarea1.Model.Encuesta;
 import com.tarea1.tarea1.Repository.EncuestaRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model; // Importar de Spring
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+
+
+import java.util.List;
 
 @Controller //Aqúi señalo que es un controlador
 public class EncuestaController {
@@ -23,6 +32,41 @@ public class EncuestaController {
 
     //Procesar formulario
     @PostMapping("/encuesta")
-    public String guardarEncuesta(Model model, Encuesta encuesta){}
-        ME HE QUEDADO POR AQUI
+    public String guardarEncuesta(@Valid @ModelAttribute Encuesta encuesta, BindingResult result, Model model){
+        if (result.hasErrors()){
+            return "formulario";
+        }
+        encuestaRepository.save(encuesta);
+        return "redirect:/encuestas";
+    }
+    // Listar encuestas
+    @GetMapping("/encuestas")
+    public String listarEncuestas(Model model) {
+        List<Encuesta> encuestas = encuestaRepository.findAll();
+        model.addAttribute("encuestas", encuestas);
+        return "listado";
+    }
+
+    // Filtrar encuestas por nivel de satisfacción
+    @GetMapping("/encuestas/filtrar")
+    public String filtrarEncuestas(@RequestParam String nivelSatisfaccion, Model model) {
+        List<Encuesta> encuestas = encuestaRepository.findByNivelSatisfaccion(nivelSatisfaccion);
+        model.addAttribute("encuestas", encuestas);
+        return "listado";
+    }
+
+    // Ver detalles de una encuesta
+    @GetMapping("/encuesta/{id}")
+    public String verEncuesta(@PathVariable Long id, Model model) {
+        Encuesta encuesta = encuestaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Encuesta no encontrada: " + id));
+        model.addAttribute("encuesta", encuesta);
+        return "detalles";
+    }
+
+    // Eliminar encuesta
+    @PostMapping("/encuesta/{id}/eliminar")
+    public String eliminarEncuesta(@PathVariable Long id) {
+        encuestaRepository.deleteById(id);
+        return "redirect:/encuestas";
+    }
 }
