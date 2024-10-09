@@ -1,4 +1,6 @@
 <form th:action="@{/encuestas/filtrar}" method="get">
+    <link rel="icon" href="data:,">
+
     <select name="motivo">
         <option value="">Todos</option>
         <option value="Trabajo">Trabajo</option>
@@ -19,8 +21,8 @@
         <td th:text="${encuesta.fechaInicioEstancia}"></td>
         <td th:text="${encuesta.nivelSatisfaccion}"></td>
         <td>
-            <a th:href="@{/encuestas/ver/{id}(id=${encuesta.id})}">Ver</a>
-            <a th:href="@{/encuestas/eliminar/{id}(id=${encuesta.id})}">Eliminar</a>
+            <a th:href="@{/encuesta/{id}(id=${encuesta.id})}">Ver</a>
+            <a th:href="@{/encuesta/{id}(id=${encuesta.id})}">Eliminar</a>
         </td>
     </tr>
 </table>

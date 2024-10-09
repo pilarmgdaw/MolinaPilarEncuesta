@@ -73,7 +73,7 @@ public class Encuesta {
         this.id = id;
     }
 
-    public String get0trosComentarios() {
+    public String getOtrosComentarios() {
         return otrosComentarios;
     }
 

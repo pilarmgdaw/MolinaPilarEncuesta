@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
-
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller //Aqúi señalo que es un controlador
@@ -59,6 +59,9 @@ public class EncuestaController {
     @GetMapping("/encuesta/{id}")
     public String verEncuesta(@PathVariable Long id, Model model) {
         Encuesta encuesta = encuestaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Encuesta no encontrada: " + id));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaFormateada = encuesta.getFechaInicioEstancia() != null ? encuesta.getFechaInicioEstancia().format(formatter) : "No disponible";
+        model.addAttribute("fechaFormateada", fechaFormateada);
         model.addAttribute("encuesta", encuesta);
         return "detalles";
     }
