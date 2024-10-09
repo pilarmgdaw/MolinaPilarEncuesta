@@ -64,6 +64,7 @@ public class EncuestaController {
         model.addAttribute("fechaFormateada", fechaFormateada);
         model.addAttribute("encuesta", encuesta);
         return "detalles";
+        //COMENTARIO PRUEBA
     }
 
     // Eliminar encuesta
